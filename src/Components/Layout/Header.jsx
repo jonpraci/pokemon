@@ -9,14 +9,16 @@ import { PockContext } from '../../Context/PockemonContext';
 
 
 export default function TheHeader() {
-  const { fliterfun, clonepokemon } = useContext(PockContext);
+  const { fliterfun, clonepokemon ,searchfun } = useContext(PockContext);
 
   return (
     <div className="header">
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
-          <Toolbar style={{ background: 'rgb(200 84 48)' }}>
+          <Toolbar style={{ background: 'rgb(200 84 48)' , justifyContent:'space-between'}}>
+            <Toolbar  style={{cursor:'pointer',margin:'0',padding:'0'}}>
             <IconButton
+            style={{margin:'0'}}
               size="large"
               edge="start"
               color="inherit"
@@ -26,6 +28,7 @@ export default function TheHeader() {
               <AcUnitIcon />
             </IconButton>
             <Typography
+              
               variant="h6"
               noWrap
               component="div"
@@ -34,8 +37,11 @@ export default function TheHeader() {
             >
               POCKEMON
           </Typography>
-            
+          </Toolbar>
             <select className="select_box" onChange={({ target }) => fliterfun(target.value)}>
+              <option value="All Pokemons">
+                All Pokemons
+              </option>
               {
                 clonepokemon.map((ele, i) => {
                   return <option key={i} value={ele.name}>{ele.name}</option>
@@ -44,9 +50,7 @@ export default function TheHeader() {
 
             </select>
 
-
-
-
+              <input className="input_search" placeholder="Search Pokemon" type="text" onChange={({target}) => searchfun(target.value)}/>
           </Toolbar>
         </AppBar>
       </Box>

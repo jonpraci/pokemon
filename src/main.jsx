@@ -4,6 +4,7 @@ import './index.css';
 import {
   createBrowserRouter,
   RouterProvider,
+  BrowserRouter
 } from "react-router-dom";
 import ContextProvider from "./Context/PockemonContext";
 import ErrorPage from './Pages/ErrorPage';
@@ -26,7 +27,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <ContextProvider>
+    <BrowserRouter>
     <TheHeader />
+    </BrowserRouter>
     <RouterProvider router={router} />
   </ContextProvider>,
 )

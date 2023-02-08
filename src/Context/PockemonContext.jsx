@@ -11,9 +11,21 @@ const ContextProvider = ({ children }) => {
   const [clonepokemon , setClonepokemon] = useState([]);
 
   const fliterfun = (val) => {// function call select box it is on Header component to get selected value
-    setSearchValue(val);
+    if(val == 'All Pokemons'){
+      setLoading(true);
+      setSearchValue('');
+    }else{
+      setSearchValue(val);
+      setCurrentPage(1) 
+    }
+    
   }
-  
+
+  const searchfun = (val) => {
+    setSearchValue(val)
+  }
+
+ 
   // get all pokemons for ui based on the name i got it from getAllPokemons call
   const createPokemonObject = (results) => {
     // filter the array of pokemon names based on select box
@@ -47,6 +59,8 @@ const ContextProvider = ({ children }) => {
       console.log(error.message)
     }
   }
+
+  
   useEffect(() => {
     // clear all data from pokemons state
     setPokemons([]);
@@ -98,7 +112,8 @@ const ContextProvider = ({ children }) => {
         fliterfun,
         searchValue,
         clonepokemon,
-        loading
+        loading,
+        searchfun
       }}>
 
         {children}
